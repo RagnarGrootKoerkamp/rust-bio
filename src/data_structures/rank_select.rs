@@ -202,7 +202,7 @@ impl RankSelect {
     }
 }
 
-#[derive(Copy, Clone, Eq, PartialEq, Hash, Debug, Serialize, Deserialize)]
+#[derive(Copy, Clone, Eq, PartialEq, Hash, Debug, Serialize, Deserialize, mem_dbg::MemSize)]
 pub enum SuperblockRank {
     First(u64),
     Some(u64),

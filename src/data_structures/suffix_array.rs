@@ -29,6 +29,7 @@ use std::hash::BuildHasherDefault;
 use std::iter;
 use std::ops::Deref;
 
+use mem_dbg::{MemDbg, MemSize};
 use num_integer::Integer;
 use num_traits::{cast, NumCast, Unsigned};
 
@@ -129,6 +130,20 @@ pub struct SampledSuffixArray<DBWT: Borrow<BWT>, DLess: Borrow<Less>, DOcc: Borr
     s: usize, // Rate of sampling
     extra_rows: HashMapFx<usize, usize>,
     sentinel: u8,
+}
+
+impl<DBWT: Borrow<BWT>, DLess: Borrow<Less>, DOcc: Borrow<Occ>> MemSize
+    for SampledSuffixArray<DBWT, DLess, DOcc>
+{
+    fn mem_size(&self, flags: mem_dbg::SizeFlags) -> usize {
+        // self.bwt.borrow().mem_size(flags)
+        // + self.less.borrow().mem_size(flags)
+        // + self.occ.borrow().mem_size(flags)
+        self.sample.mem_size(flags)
+        // + self.extra_rows.mem_size(flags)
+        // + self.sentinel.mem_size(flags)
+        // + self.s.mem_size(flags)
+    }
 }
 
 impl SuffixArray for RawSuffixArray {

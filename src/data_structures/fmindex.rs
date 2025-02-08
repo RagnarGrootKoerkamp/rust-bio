@@ -57,6 +57,8 @@
 use std::borrow::Borrow;
 use std::iter::DoubleEndedIterator;
 
+use mem_dbg::{MemDbg, MemSize};
+
 use crate::alphabets::dna;
 use crate::data_structures::bwt::{Less, Occ, BWT};
 use crate::data_structures::suffix_array::SuffixArray;
@@ -204,7 +206,19 @@ pub trait FMIndexable {
 /// The Fast Index in Minute space (FM-Index, Ferragina and Manzini, 2000) for finding suffix array
 /// intervals matching a given pattern.
 #[derive(
-    Default, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash, Debug, Serialize, Deserialize,
+    Default,
+    Copy,
+    Clone,
+    Eq,
+    PartialEq,
+    Ord,
+    PartialOrd,
+    Hash,
+    Debug,
+    Serialize,
+    Deserialize,
+    MemDbg,
+    MemSize,
 )]
 pub struct FMIndex<DBWT: Borrow<BWT>, DLess: Borrow<Less>, DOcc: Borrow<Occ>> {
     bwt: DBWT,

@@ -9,6 +9,8 @@
 
 use std::iter::repeat;
 
+use mem_dbg::{MemDbg, MemSize};
+
 use crate::alphabets::Alphabet;
 use crate::data_structures::suffix_array::RawSuffixArraySlice;
 use crate::utils::prescan;
@@ -73,7 +75,20 @@ pub fn invert_bwt(bwt: &BWTSlice) -> Vec<u8> {
 }
 
 /// An occurrence array implementation.
-#[derive(Default, Clone, Eq, PartialEq, Ord, PartialOrd, Hash, Debug, Serialize, Deserialize)]
+#[derive(
+    Default,
+    Clone,
+    Eq,
+    PartialEq,
+    Ord,
+    PartialOrd,
+    Hash,
+    Debug,
+    Serialize,
+    Deserialize,
+    MemSize,
+    MemDbg,
+)]
 pub struct Occ {
     occ: Vec<Vec<usize>>,
     k: u32,
