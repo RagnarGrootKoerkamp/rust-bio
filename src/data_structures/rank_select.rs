@@ -35,7 +35,7 @@ use bv::Bits;
 pub struct RankSelect {
     n: usize,
     bits: BitVec<u8>,
-    superblocks_1: Vec<SuperblockRank>,
+    pub superblocks_1: Vec<SuperblockRank>,
     superblocks_0: Vec<SuperblockRank>,
     /// superblock size in bits
     s: usize,
@@ -64,7 +64,7 @@ impl RankSelect {
             s,
             k,
             superblocks_1: superblocks(true, n, s, &bits),
-            superblocks_0: superblocks(false, n, s, &bits),
+            superblocks_0: superblocks(false, 0, s, &BitVec::default()),
             bits,
         }
     }
